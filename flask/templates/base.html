@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}主模板{% endblock %}</title>
+</head>
+<body>
+<ul>
+    <li><a href="#">首页</a></li>
+    <li><a href="#">新闻</a></li>
+</ul>
+{% block body %}
+<p>父模板内容</p>
+{% endblock%}
+
+<footer>底部标签</footer>
+</body>
+</html>

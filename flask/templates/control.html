@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+{% if age>=18 %}
+    <div>成年</div>
+{% else %}
+    <div>未成年</div>
+{% endif %}
+
+{% for i in book %}
+    <p>名称：{{i.name}}</p>
+    <p>作者：{{i.author}}</p>
+{% endfor %}
+</body>
+</html>
