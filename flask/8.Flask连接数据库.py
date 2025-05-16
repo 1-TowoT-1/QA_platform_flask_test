@@ -13,8 +13,8 @@ app = Flask(__name__)
 #     conn = psycopg.connect(
 #         dbname="postgres",
 #         user="postgres",
-#         password="hbxt9688",
-#         host="172.31.136.83",  # localhost或远程IP
+#         password="123456",
+#         host="XXX.XXX.XXX",  # localhost或远程IP
 #         port="5432"
 #     )
 #     return conn
@@ -60,13 +60,13 @@ app = Flask(__name__)
 from flask_sqlalchemy import SQLAlchemy
 
 # Postgresql主机名称
-HOSTNAME = '172.31.136.83'
+HOSTNAME = 'XXX.XXX.XXX'
 # 监听端口
 POST = '5432'
 # 连接用户名
 USERNAME = 'postgres'
 # 连接密码
-PASSWORD = 'hbxt9688'
+PASSWORD = '123456'
 # 连接数据库的名称
 DATABASE = 'postgres'
 
