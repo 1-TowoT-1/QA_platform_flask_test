@@ -143,3 +143,9 @@ if __name__ == '__main__':
     data = session.query(StudentScore).all()
     result = [dict(row.__dict__) for row in data]
     print(result[1])
+
+
+# flask远程更新数据库内容：
+# flask db init：初始化，只需要执行一次
+# flask db migrate：将ORM模型生成迁移脚本
+# flask db upgrate：将迁移脚本映射到数据库中

@@ -109,3 +109,11 @@ psql: error: connection to server on socket "/var/run/postgresql/.s.PGSQL.5432" 
     1. 移交拥有的对象（防止报错）：`REASSIGN OWNED BY username TO new_owner;`
     2. 删除该用户拥有的所有权限和对象：`DROP OWNED BY username;`
     3. 删除用户本身：`DROP USER username;`
+
+
+### 八、服务管理
++ postgresql作为服务运行在后台，需要手动管理服务的开启关闭。
++ 使用命令重启/关闭postgresql服务：
+    1. sudo service postgresql start
+    2. sudo service postgresql stop
+    3. sudo service postgresql status
