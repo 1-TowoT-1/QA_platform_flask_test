@@ -1,19 +1,40 @@
-from flask import Blueprint,render_template,request,jsonify,redirect,url_for # redirect重定向
+from flask import Blueprint,render_template,request,jsonify,redirect,url_for,session # redirect重定向
 from exts import mail,db
 from flask_mail import Message
 import random
 from models import EmailCaptchaModel,UserModel
-from blueprints.forms import RegisterForm # 或者使用同级目录相对路径导入：from .forms import RegisterForm
+from blueprints.forms import RegisterForm,LoginForm # 或者使用同级目录相对路径导入：from .forms import RegisterForm
 # password不能直接保存password，因为这里是明文密码，如果数据库被盗取了，那么就会造成用户信息流失。
-from werkzeug.security import generate_password_hash
+from werkzeug.security import generate_password_hash,check_password_hash
 
 # /auth
 bp = Blueprint("auth", __name__, url_prefix="/auth")
 
 # /auth/login
-@bp.route("/login")
+@bp.route("/login", methods=['GET','POST'])
 def login():
-    return render_template("login.html")
+    if request.method == 'GET':
+        return render_template("login.html")
+    else:
+        form = LoginForm(request.form)
+        if form.validate():
+            email = form.email.data
+            password = form.password.data
+            user = UserModel.query.filter_by(email=email).first()
+            if not user:
+                print("邮箱在数据库中不存在！")
+                return redirect(url_for("auth.login"))
+            if check_password_hash(pwhash=user.password, password=password):
+                # cookie：cookie中不适合存储大量数据，一般用来存放登录授权内容
+                # flask中的session是经过加密处理存储在cookie当中的
+                session['user_id'] = user.id
+                return redirect("/")
+            else:
+                print("密码错误！")
+        else:
+            print(form.errors)
+            return redirect(url_for("auth.login"))
+        
 
 @bp.route("/register", methods=['GET','POST'])
 def register():

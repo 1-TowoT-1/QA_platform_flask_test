@@ -20,6 +20,9 @@ migrate = Migrate(app, db)
 # app.register_blueprint(qa_bp)
 app.register_blueprint(auth_bp)
 
+@app.route('/')
+def hello_word():
+    return '这是首页'
 
 if __name__ == '__main__':
     app.run(debug=True)
