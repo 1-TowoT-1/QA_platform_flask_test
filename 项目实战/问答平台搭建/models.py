@@ -27,9 +27,9 @@ class QuestionModel(db.Model):
     content = db.Column(db.String(100),nullable=False)
     author_name = db.Column(db.String(20),nullable=False)
     create_time = db.Column(db.DateTime, default=now_without_microseconds)
-    author_id = db.Column(db.Integer, db.ForeignKey("user.id"))   
-
-    author = db.relationship(UserModel, backref="questions")
+    # 设置外键，并且设置级联删除： ondelete='CASCADE'，relationship需要开启passive_deletes=True
+    author_id = db.Column(db.Integer, db.ForeignKey("user.id", ondelete='CASCADE'))
+    author = db.relationship(UserModel, backref="questions", passive_deletes=True)
 
 
 class AnswerModel(db.Model):
@@ -39,10 +39,10 @@ class AnswerModel(db.Model):
     create_time = db.Column(db.DateTime, default=now_without_microseconds)
 
     # 增加外键，答案是回复哪个问题，问题的ID
-    question_id = db.Column(db.Integer, db.ForeignKey("question.id"))
+    question_id = db.Column(db.Integer, db.ForeignKey("question.id",ondelete='CASCADE'))
     # 增加外键，答案是谁回复的，user用户ID
-    author_id = db.Column(db.Integer, db.ForeignKey("user.id"))
+    author_id = db.Column(db.Integer, db.ForeignKey("user.id", ondelete='CASCADE'))
 
     # 关系
-    question = db.relationship(QuestionModel, backref=db.backref("answer", order_by=create_time.desc()))
-    author = db.relationship(UserModel, backref="answer")
+    question = db.relationship(QuestionModel, backref=db.backref("answer", order_by=create_time.desc()), passive_deletes=True)
+    author = db.relationship(UserModel, backref="answer", passive_deletes=True)

@@ -15,6 +15,8 @@ class RegisterForm(wtforms.Form):
 
     # 自定义验证
     # 1. 邮箱是否已经被注册
+    # validate_字段名(self, field) 就会自动绑定到对应的字段。
+    # field 是一个 wtforms 内部传入的参数，代表 当前正在验证的字段对象。
     def validate_email(self, field):
         email = field.data
         user = UserModel.query.filter_by(email=email).first()
