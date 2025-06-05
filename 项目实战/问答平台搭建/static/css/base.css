@@ -6,8 +6,12 @@ a, abbr, acronym, address, applet, article, aside, audio, b, big, blockquote, bo
     list-style: none;
 }
 
-.zhiliaologo{
-    width: 100px;
+.zhiliaologo {
+    height: 100%;         /* 适应父容器高度 */
+    max-height: 100%;     /* 防止撑大 */
+    width: auto;          /* 保持宽高比例 */
+    object-fit: contain;  /* 图片自适应裁剪，不变形 */
+    display: block;
 }
 
 .main{

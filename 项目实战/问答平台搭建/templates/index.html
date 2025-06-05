@@ -3,23 +3,23 @@
     <link rel="stylesheet" href="{{ url_for('static',filename='css/index.css') }}">
 {% endblock %}
 {% block title %}
-    首页
+    测试问题平台--首页
 {% endblock %}
 
 {% block main %}
     <ul class="question-ul">
         {% for question in questions %}
-              <li>
+            <li>
                 <div class="side-question">
-                    <img class="side-question-avatar" src="{{ url_for('static',filename="images/zhiliao.png") }}" alt="">
+                    <img class="side-question-avatar" src="{{ url_for('static',filename="images/doro娘.png") }}" alt="">
                 </div>
                 <div class="question-main">
-                    <p class="question-title"><a href="{{ url_for('detail',id=question.id) }}">{{ question.title }}</a></p>
-                    <p class="question-content">{{ question.content }}</p>
-                    <p class="question-detail">
-                        <span class="question-author">{{ question.author.username }}</span>
-                        <span class="question-time">{{ question.create_time }}</span>
-                    </p>
+                    <div class="question-title"><a href="{{ url_for('qa.qa_detail', qa_id=question.id) }}">{{ question.title }}</a></div>
+                    <div class="question-content">{{ question.content }}</div>
+                    <div class="question-detail">
+                        <a href="#">{{question.author.username}}</a>
+                        <span class="create-time">{{ question.create_time.strftime('%Y-%m-%d %H:%M:%S') }}</span>
+                    </div>
                 </div>
             </li>
         {% endfor %}

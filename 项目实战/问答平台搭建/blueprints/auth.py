@@ -58,6 +58,14 @@ def register():
             print(form.errors)
             return redirect(url_for("auth.register"))
 
+
+# 退出登录
+@bp.route("/logout")
+def logout():
+    session.clear()
+    return redirect("/") #flask运行app.py，所以直接调用app的函数即可，或者可以写成 redirect("/")，url_for是返回函数名称的。
+
+
 # 发送验证码
 # 如果没有指定，bp.route默认的是get请求
 @bp.route("/captcha/email")
